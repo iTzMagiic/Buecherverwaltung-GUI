@@ -1,7 +1,6 @@
-package com.example.buecherverwaltung;
+package com.example.buecherverwaltung.utils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Library {
 

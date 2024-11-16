@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="516.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.buecherverwaltung.controller.LoggedInController">
+   <children>
+      <ImageView fitHeight="523.0" fitWidth="519.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/home.jpg" />
+         </image>
+      </ImageView>
+      <VBox layoutX="118.0" layoutY="131.0" prefHeight="258.0" prefWidth="284.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="284.0" text="Buch hinzufügen" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="284.0" text="Buch entfernen" />
+            <Button layoutX="10.0" layoutY="64.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="284.0" text="Alle Bücher anzeigen" />
+            <Button layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="54.0" prefWidth="284.0" text="zurück zum Login bereich" />
+            <Button layoutX="10.0" layoutY="172.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="284.0" text="Beenden" />
+         </children></VBox>
+      <Label fx:id="label_welcome" layoutX="118.0" layoutY="80.0" prefHeight="30.0" prefWidth="306.0" text="Willkommen !!!">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

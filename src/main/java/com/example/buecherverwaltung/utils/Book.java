@@ -1,4 +1,4 @@
-package com.example.buecherverwaltung;
+package com.example.buecherverwaltung.utils;
 
 import java.io.Serial;
 import java.io.Serializable;

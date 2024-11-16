@@ -1,9 +1,6 @@
-package com.example.buecherverwaltung;
+package com.example.buecherverwaltung.utils;
 
-import java.awt.print.Book;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Database {
     private final String URL = "jdbc:mysql://localhost:3306/buecherverwaltung";

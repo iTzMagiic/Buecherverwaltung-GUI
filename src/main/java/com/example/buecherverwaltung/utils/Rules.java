@@ -1,4 +1,4 @@
-package com.example.buecherverwaltung;
+package com.example.buecherverwaltung.utils;
 
 public class Rules {
 

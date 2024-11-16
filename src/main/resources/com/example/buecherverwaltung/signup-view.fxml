@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="508.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.buecherverwaltung.controller.SignupController">
+   <children>
+      <ImageView fitHeight="519.0" fitWidth="582.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/signUpBackground.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="button_signup" layoutX="174.0" layoutY="319.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="174.0" text="Signup!" />
+      <PasswordField fx:id="field_password" alignment="CENTER" layoutX="129.0" layoutY="260.0" prefHeight="34.0" prefWidth="261.0" promptText="Passwort" />
+      <TextField fx:id="field_username" alignment="CENTER" layoutX="130.0" layoutY="166.0" prefHeight="34.0" prefWidth="261.0" promptText="Benutzername" />
+      <TextField fx:id="field_name" alignment="CENTER" layoutX="129.0" layoutY="213.0" prefHeight="34.0" prefWidth="261.0" promptText="Name" />
+      <Button fx:id="button_login" layoutX="203.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="25.0" prefWidth="124.0" text="Log In!" underline="true" />
+      <Label layoutX="203.0" layoutY="384.0" text="Doch ein Mitglied?">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

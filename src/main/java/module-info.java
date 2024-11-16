@@ -7,4 +7,8 @@ module com.example.buecherverwaltung {
 
     opens com.example.buecherverwaltung to javafx.fxml;
     exports com.example.buecherverwaltung;
+    exports com.example.buecherverwaltung.controller;
+    opens com.example.buecherverwaltung.controller to javafx.fxml;
+    exports com.example.buecherverwaltung.utils;
+    opens com.example.buecherverwaltung.utils to javafx.fxml;
 }
