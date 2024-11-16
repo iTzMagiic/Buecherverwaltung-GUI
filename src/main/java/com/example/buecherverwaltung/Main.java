@@ -7,22 +7,27 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-//    @Override
-//    public void start(Stage stage) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login-view.fxml"));
-//
-//        Scene scene = new Scene(fxmlLoader.load());
-//        stage.setTitle("Log in!");
-//        stage.setScene(scene);
-//        stage.show();
-//    }
+        /*
+        *
+    +-------------------+
+    |      Stage        |  <--- Das Fenster
+    |                   |
+    |  +-------------+  |
+    |  |    Scene    | |  <--- Die Szene
+    |  |             |  |
+    |  |  +-------+  |  |
+    |  |  | Parent|  |  |  <--- Das Root-Layout (geladen durch FXMLLoader)
+    |  |  +-------+  |  |
+    |  +-------------+  |
+    +-------------------+
+        *
+        * */
+
 
     @Override
     public void start(Stage primaryStage) {
-        SceneManager.setStage(primaryStage);
-        SceneManager.switchScene("/com/example/buecherverwaltung/login-view.fxml");
-        primaryStage.setTitle("Login!");
-        primaryStage.show();
+        SceneManager.setStage(primaryStage); // Übergibt die Haupt-Stage
+        SceneManager.switchScene("/com/example/buecherverwaltung/login-view.fxml", "Login! in iTzMagiic's Bücherverwaltung"); // Lädt die erste Szene
     }
 
     public static void main(String[] args) {

@@ -2,15 +2,20 @@ package com.example.buecherverwaltung.utils;
 
 public class UserSession {
 
-    private static UserSession instance;
+    /*
+     * Diese Klasse implementiert das "Singleton-Pattern".
+     * Ein Objekt der Klasse kann nur über die Methode getInstance() erstellt werden.
+     * Dadurch wird sichergestellt, dass es in der gesamten Anwendung
+     * nur eine einzige Instanz der Klasse gibt.
+     */
 
+
+    private static UserSession instance;
     private int userID;
     private String name;
 
 
-    public UserSession() {
-
-    }
+    private UserSession() {}
 
     public static UserSession getInstance() {
         if(instance == null) {

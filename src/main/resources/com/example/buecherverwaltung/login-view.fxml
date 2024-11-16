@@ -12,21 +12,21 @@
             <Image url="@../../../images/secure.jpg" />
          </image>
       </ImageView>
-      <Button layoutX="45.0" layoutY="130.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="31.0" prefWidth="130.0" text="Login" />
-      <TextField fx:id="field_username" alignment="CENTER" layoutX="16.0" layoutY="44.0" promptText="Benutzername">
+      <TextField fx:id="field_username" alignment="CENTER" layoutX="16.0" layoutY="28.0" promptText="Benutzername">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="field_password" alignment="CENTER" layoutX="16.0" layoutY="87.0" promptText="Passwort">
+      <PasswordField fx:id="field_password" alignment="CENTER" layoutX="16.0" layoutY="69.0" promptText="Passwort">
          <font>
             <Font size="15.0" />
          </font>
       </PasswordField>
-      <Hyperlink layoutX="69.0" layoutY="167.0" onMouseClicked="#signup" text="Sign up!" underline="true">
+      <Button layoutX="16.0" layoutY="114.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="31.0" prefWidth="82.0" text="Einloggen" />
+      <Button layoutX="121.0" layoutY="114.0" mnemonicParsing="false" onMouseClicked="#signup" prefHeight="31.0" prefWidth="82.0" text="Registrieren" textFill="#1e47ff" underline="true">
          <font>
-            <Font name="System Bold Italic" size="18.0" />
+            <Font name="System Italic" size="12.0" />
          </font>
-      </Hyperlink>
+      </Button>
    </children>
 </AnchorPane>

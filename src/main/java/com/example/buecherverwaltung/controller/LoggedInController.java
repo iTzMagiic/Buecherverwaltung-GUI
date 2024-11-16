@@ -24,8 +24,13 @@ public class LoggedInController {
     }
 
     @FXML
-    private void login(MouseEvent event) {
-        SceneManager.switchScene("/com/example/buecherverwaltung/login-view.fxml");
+    private void logout(MouseEvent event) {
+        SceneManager.switchScene("/com/example/buecherverwaltung/login-view.fxml", "Login! in iTzMagiic's Bücherverwaltung");
+    }
+
+    @FXML
+    private void exit(MouseEvent event) {
+        System.exit(0);
     }
 
 

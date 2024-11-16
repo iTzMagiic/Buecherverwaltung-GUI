@@ -17,8 +17,8 @@
             <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="284.0" text="Buch hinzufügen" />
             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="284.0" text="Buch entfernen" />
             <Button layoutX="10.0" layoutY="64.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="284.0" text="Alle Bücher anzeigen" />
-            <Button layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="54.0" prefWidth="284.0" text="zurück zum Login bereich" />
-            <Button layoutX="10.0" layoutY="172.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="284.0" text="Beenden" />
+            <Button layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="54.0" prefWidth="284.0" text="Ausloggen" />
+            <Button layoutX="10.0" layoutY="172.0" mnemonicParsing="false" onMouseClicked="#exit" prefHeight="54.0" prefWidth="284.0" text="Beenden" />
          </children></VBox>
       <Label fx:id="label_welcome" layoutX="118.0" layoutY="80.0" prefHeight="30.0" prefWidth="306.0" text="Willkommen !!!">
          <font>
