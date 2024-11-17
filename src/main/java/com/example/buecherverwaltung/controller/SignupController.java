@@ -33,7 +33,6 @@ public class SignupController{
         String username = field_username.getText();
         String password = field_password.getText();
         String name = field_name.getText();
-        int userID = -1;
 
         if(!database.testConnection()) {
             Rules.showErrorAlert("Die Verbindung zur Datenbank konnte nicht hergestellt werden.");

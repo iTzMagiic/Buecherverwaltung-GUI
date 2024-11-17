@@ -39,9 +39,9 @@ public class Rules {
         return author != null && !author.trim().isEmpty() && author.matches("[a-zA-Z ]+");
     }
 
-    public static boolean isValidYear(String yearText) {
+    public static boolean isValidYear(String yearOfPublicationText) {
         try {
-            int year = Integer.parseInt(yearText);
+            int year = Integer.parseInt(yearOfPublicationText);
             return year > 1900 && year < 2025;
         } catch (NumberFormatException e) {
             return false;

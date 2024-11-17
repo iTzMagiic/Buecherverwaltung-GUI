@@ -66,15 +66,15 @@ public class LoggedInController {
         String title = field_title.getText();
         String author = field_author.getText();
         String yearOfPublicationText = field_yearOfPublication.getText();
-        int yearOfPublication;
+        int yearOfPublication = -1;
         UserSession session = UserSession.getInstance();
 
         if(!Rules.isValidTitle(title)) {
-            Rules.showErrorAlert("Titel darf nicht leer sein & der Titel darf nur Buchstaben, Ziffern und Leerzeichen enthalten.");
+            Rules.showErrorAlert("Titel darf nicht leer sein und darf nur Buchstaben, Ziffern und Leerzeichen enthalten.");
             return;
         }
         if(!Rules.isValidAuthor(author)) {
-            Rules.showErrorAlert("Autor darf nicht leer sein & Autor darf nur Buchstaben und Leerzeichen enthalten.");
+            Rules.showErrorAlert("Autor darf nicht leer sein und darf nur Buchstaben und Leerzeichen enthalten.");
             return;
         }
         if(!Rules.isValidYear(yearOfPublicationText)) {
@@ -82,44 +82,18 @@ public class LoggedInController {
             return;
         }
 
-//        if (title == null || title.trim().isEmpty()) {
-//            Rules.showErrorAlert("Titel darf nicht leer sein.");
-//            return;
-//        }
-//        if (!title.matches("[a-zA-Z0-9 ]+")) {
-//            /*
-//                Der reguläre Ausdruck "[a-zA-Z0-9 ]+" erlaubt:
-//                - Buchstaben von a bis z und A-Z
-//                - Ziffern von 0 bis 9
-//                - Leerzeichen (nach der '9' steht ein Leerzeichen im Ausdruck)
-//                das "+" bedeutet, dass mindestens ein Zeichen vorhanden sein muss.
-//             */
-//            Rules.showErrorAlert("Titel darf nur Buchstaben, Ziffern und Leerzeichen enthalten.");
-//            return;
-//        }
-//        if (author == null || author.trim().isEmpty()) {
-//            Rules.showErrorAlert("Autor darf nicht leer sein.");
-//            return;
-//        }
-//        if (!author.matches("[a-zA-Z ]+")) {
-//            Rules.showErrorAlert("Autor darf nur Buchstaben und Leerzeichen enthalten.");
-//            return;
-//        }
-//        try {
-//            yearOfPublication = Integer.parseInt(yearOfPublicationText);
-//            if (yearOfPublication <= 1900 || yearOfPublication >= 2025) {
-//                Rules.showErrorAlert("Das Veröffentlichungsjahr ist falsch.");
-//                return;
-//            }
-//        } catch (NumberFormatException e) {
-//            Rules.showErrorAlert("Bitte geben Sie ein gültiges Jahr ein.");
-//            System.err.println("Fehler beim Konventieren von String zu Integer. " + e.getMessage());
-//            return;
-//        }
+        try {
+            yearOfPublication = Integer.parseInt(yearOfPublicationText);
+        } catch (NumberFormatException e) {
+            System.err.println("Fehler beim Formatieren von String zu Integer. " + e.getMessage());
+        }
 
-        database.addBook(title, author, yearOfPublication, session.getUserID());
-        Rules.showConfirmAlert("Das Buch wurde erfolgreich hinzugefügt.");
-        SceneManager.switchScene("/com/example/buecherverwaltung/loggedin-view.fxml", "Willkommen " + session.getName());
+        if(yearOfPublication != -1) {
+            database.addBook(title, author, yearOfPublication, session.getUserID());
+            Rules.showConfirmAlert("Das Buch wurde erfolgreich hinzugefügt.");
+            SceneManager.switchScene("/com/example/buecherverwaltung/loggedin-view.fxml", "Willkommen " + session.getName());
+        }
+
     }
 
     @FXML
