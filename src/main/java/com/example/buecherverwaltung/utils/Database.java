@@ -8,23 +8,43 @@ public class Database {
     private final String PASSWORD = "X(RL_{9yA#q,eTg?CZWJuX-";
 
 
-    public Connection createConnection() {
+    public Connection getConnection() {
         Connection connection = null;
+
         try {
             // Hier verwenden wir die Methode aus der DatabaseConnection-Klasse
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
 
             if (connection != null) {
-                System.out.println("Verbindung erfolgreich!");
+                return connection;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Verbindung zur Datenbank fehlgeschlagen!");
+            System.err.println("Verbindung zur Datenbank fehlgeschlagen! " + e.getMessage());
         }
-        return connection; // Verbindung zurückgeben
+        finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.err.println("Schließen der Datenbank fehlgeschlagen! " + e.getMessage());
+                }
+            }
+        }
+        return connection;
     }
 
-    public void addBook(String title, String author, int yearOfPublication, int userID) {
+    public boolean testConnection() {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            if (connection != null) {
+                return true; // Verbindung erfolgreich
+            }
+        } catch (SQLException e) {
+            System.err.println("Verbindung zur Datenbank fehlgeschlagen! " + e.getMessage());
+        }
+        return false; // Verbindung fehlgeschlagen
+    }
+
+    public boolean addBook(String title, String author, int yearOfPublication, int userID) {
         String sql = "INSERT INTO buecher (titel, autor, erscheinungsjahr, idbenutzer) VALUES (?, ?, ?, ?)";
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -36,10 +56,11 @@ public class Database {
             preparedStatement.setInt(4, userID);
             preparedStatement.executeUpdate();
 
-            System.out.println("Buch erfolgreich zur Datenbank hinzugefügt.");
+            return true;
         } catch (SQLException e) {
             System.out.println("Fehler beim Hinzufügen des Buches: " + e.getMessage());
         }
+        return false;
     }
 
 //    public List<Book> getAllBooks(int userID) {

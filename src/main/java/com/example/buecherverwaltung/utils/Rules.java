@@ -17,10 +17,35 @@ public class Rules {
         return password != null && password.matches("^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?]).{8,}$");
     }
 
-    public static void showAlert(String header) {
+    public static void showErrorAlert(String header) {
         Alert alert = new Alert(Alert.AlertType.ERROR); // Standardmäßig ein Info-Dialog
         alert.setTitle("Fehler!");
         alert.setHeaderText(header);
         alert.showAndWait(); // Zeigt den Dialog an und wartet, bis der Benutzer ihn schließt
     }
+
+    public static void showConfirmAlert(String header) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Erfolgreich!");
+        alert.setHeaderText(header);
+        alert.showAndWait();
+    }
+
+    public static boolean isValidTitle(String title) {
+        return title != null && !title.trim().isEmpty() && title.matches("[a-zA-Z0-9 ]+");
+    }
+
+    public static boolean isValidAuthor(String author) {
+        return author != null && !author.trim().isEmpty() && author.matches("[a-zA-Z ]+");
+    }
+
+    public static boolean isValidYear(String yearText) {
+        try {
+            int year = Integer.parseInt(yearText);
+            return year > 1900 && year < 2025;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
 }

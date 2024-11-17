@@ -6,7 +6,6 @@ import com.example.buecherverwaltung.utils.Database;
 import com.example.buecherverwaltung.utils.Rules;
 import com.example.buecherverwaltung.utils.UserSession;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -22,9 +21,11 @@ public class LoginController {
 
 
 
+
     public LoginController() {
         this.database = new Database();
     }
+
 
 
     @FXML
@@ -33,19 +34,26 @@ public class LoginController {
         String password = field_password.getText();
         int userID = -1;
 
+        if(!database.testConnection()) {
+            Rules.showErrorAlert("Die Verbindung zur Datenbank konnte nicht hergestellt werden.");
+            return;
+        }
         if(username.isEmpty() || password.isEmpty()) {
-            Rules.showAlert("Bitte füllen Sie alle Felder aus.");
+            Rules.showErrorAlert("Bitte füllen Sie alle Felder aus.");
             return;
         }
         if(!database.usernameExists(username)) {
-            Rules.showAlert("Benutzername existiert nicht.");
+            field_username.clear();
+            field_password.clear();
+            Rules.showErrorAlert("Benutzername existiert nicht.");
             return;
         }
 
         userID = database.getUserID(username, password);
 
         if(userID == -1) {
-            Rules.showAlert("Falsches Passwort.");
+            field_password.clear();
+            Rules.showErrorAlert("Falsches Passwort.");
             return;
         }
 
@@ -56,6 +64,12 @@ public class LoginController {
 
         SceneManager.switchScene("/com/example/buecherverwaltung/loggedin-view.fxml", "Willkommen " + name +"");
     }
+
+    @FXML
+    private void exit(MouseEvent event) {
+        System.exit(0);
+    }
+
 
     @FXML
     private void signup(MouseEvent event) {

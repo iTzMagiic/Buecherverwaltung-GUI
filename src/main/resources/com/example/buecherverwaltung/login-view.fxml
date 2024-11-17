@@ -9,7 +9,7 @@
    <children>
       <ImageView fitHeight="519.0" fitWidth="519.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/secure.jpg" />
+            <Image url="@../../../images/loginBackgroundImage.jpg" />
          </image>
       </ImageView>
       <TextField fx:id="field_username" alignment="CENTER" layoutX="16.0" layoutY="28.0" promptText="Benutzername">
@@ -28,5 +28,6 @@
             <Font name="System Italic" size="12.0" />
          </font>
       </Button>
+      <Button layoutX="16.0" layoutY="157.0" mnemonicParsing="false" onMouseClicked="#exit" prefHeight="31.0" prefWidth="187.0" text="Beenden" />
    </children>
 </AnchorPane>
