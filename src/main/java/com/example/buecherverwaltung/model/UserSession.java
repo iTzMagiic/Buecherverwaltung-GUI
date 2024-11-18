@@ -58,7 +58,7 @@ public class UserSession {
     }
 
     public void clearBooks() {
-        books.clear();
+        books = null;
     }
 
 }

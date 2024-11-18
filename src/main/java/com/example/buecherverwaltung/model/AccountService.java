@@ -35,10 +35,10 @@ public class AccountService {
             return false;
         }
 
+        // Wenn der Login erfolgreich war, bekommt die Sitzung den Benutzer
         UserSession session = UserSession.getInstance();
         session.setUserID(userID);
-        String name = database.getName(userID);
-        session.setName(name);
+        session.setName(database.getName(userID));
 
         return true;
     }
@@ -71,10 +71,8 @@ public class AccountService {
             return false;
         }
 
-        if(database.createAccount(name, username, password)) {
-            UserSession session = UserSession.getInstance();
-            session.setName(name);
-        }
+        database.createAccount(name, username, password);
+        Rules.showConfirmAlert("Sie haben sich erfolgreich Registriert.");
 
         return true;
     }

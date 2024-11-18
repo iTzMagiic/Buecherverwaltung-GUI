@@ -12,22 +12,22 @@
             <Image url="@../../../images/loginBackgroundImage.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="field_username" alignment="CENTER" layoutX="16.0" layoutY="28.0" promptText="Benutzername">
+      <TextField fx:id="field_username" alignment="CENTER" layoutX="16.0" layoutY="28.0" onKeyPressed="#onKeyPressedEnterLogin" promptText="Benutzername">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="field_password" alignment="CENTER" layoutX="16.0" layoutY="69.0" promptText="Passwort">
+      <PasswordField fx:id="field_password" alignment="CENTER" layoutX="16.0" layoutY="69.0" onKeyPressed="#onKeyPressedEnterLogin" promptText="Passwort">
          <font>
             <Font size="15.0" />
          </font>
       </PasswordField>
-      <Button layoutX="16.0" layoutY="114.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="31.0" prefWidth="82.0" text="Einloggen" />
-      <Button layoutX="121.0" layoutY="114.0" mnemonicParsing="false" onMouseClicked="#signup" prefHeight="31.0" prefWidth="82.0" text="Registrieren" textFill="#1e47ff" underline="true">
+      <Button layoutX="16.0" layoutY="114.0" mnemonicParsing="false" onKeyPressed="#onKeyPressedEnterLogin" onMouseClicked="#onMouseClickedLogin" prefHeight="31.0" prefWidth="82.0" text="Einloggen" />
+      <Button layoutX="121.0" layoutY="114.0" mnemonicParsing="false" onKeyPressed="#onKeyPressedEnterSignup" onMouseClicked="#onMouseClickedSignup" prefHeight="31.0" prefWidth="82.0" text="Registrieren" textFill="#1e47ff" underline="true">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="16.0" layoutY="157.0" mnemonicParsing="false" onMouseClicked="#exit" prefHeight="31.0" prefWidth="187.0" text="Beenden" />
+      <Button layoutX="16.0" layoutY="157.0" mnemonicParsing="false" onKeyPressed="#onKeyPressedExit" onMouseClicked="#onMouseClickedExit" prefHeight="31.0" prefWidth="187.0" text="Beenden" />
    </children>
 </AnchorPane>

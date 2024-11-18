@@ -11,11 +11,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.List;
 
 public class LoggedInController {
 
@@ -60,70 +60,25 @@ public class LoggedInController {
     }
 
     @FXML
-    private void addBookMenu(MouseEvent event) {
+    private void executeAddBookMenu() {
         menu.setVisible(false);
         label_welcome.setVisible(false);
 
         addBookMenu.setVisible(true);
     }
-
     @FXML
-    private void logout(MouseEvent event) {
-        UserSession session = UserSession.getInstance();
-        session.clearSession();
-        SceneManager.switchScene("/com/example/buecherverwaltung/login-view.fxml", "Login! in iTzMagiic's Bücherverwaltung");
+    private void onMouseClickedAddBookMenu(MouseEvent event) {
+        executeAddBookMenu();
+    }
+    @FXML
+    private void onKeyPressedEnterAddBookMenu(KeyEvent event) {
+        if(event.getCode().toString().equals("ENTER")) {
+            executeAddBookMenu();
+        }
     }
 
     @FXML
-    private void exitProgram(MouseEvent event) {
-        System.exit(0);
-    }
-
-    @FXML
-    private void addBookToDatabase(MouseEvent event) {
-        String title = field_title.getText();
-        String author = field_author.getText();
-        String yearOfPublicationText = field_yearOfPublication.getText();
-        int yearOfPublication = -1;
-        UserSession session = UserSession.getInstance();
-
-        if(!Rules.isValidTitle(title)) {
-            Rules.showErrorAlert("Titel darf nicht leer sein und darf nur Buchstaben, Ziffern und Leerzeichen enthalten.");
-            return;
-        }
-        if(!Rules.isValidAuthor(author)) {
-            Rules.showErrorAlert("Autor darf nicht leer sein und darf nur Buchstaben und Leerzeichen enthalten.");
-            return;
-        }
-        if(!Rules.isValidYearText(yearOfPublicationText)) {
-            Rules.showErrorAlert("Das Veröffentlichungsjahr ist falsch. Bitte geben Sie ein gültiges Jahr ein.");
-            return;
-        }
-
-        try {
-            yearOfPublication = Integer.parseInt(yearOfPublicationText);
-        } catch (NumberFormatException e) {
-            System.err.println("Fehler beim Formatieren von String zu Integer. " + e.getMessage());
-        }
-
-        if(yearOfPublication != -1) {
-            database.addBook(title, author, yearOfPublication, session.getUserID());
-            Rules.showConfirmAlert("Das Buch wurde erfolgreich hinzugefügt.");
-            SceneManager.switchScene("/com/example/buecherverwaltung/loggedin-view.fxml", "Willkommen " + session.getName());
-        }
-
-    }
-
-    @FXML
-    private void exitAddBookMenu(MouseEvent event) {
-        addBookMenu.setVisible(false);
-
-        menu.setVisible(true);
-        label_welcome.setVisible(true);
-    }
-
-    @FXML
-    private void addBook(MouseEvent event) {
+    private void executeAddBook() {
         AccountService accountService = new AccountService();
 
         UserSession session = UserSession.getInstance();
@@ -139,49 +94,112 @@ public class LoggedInController {
         } catch (NumberFormatException e) {
             Rules.showErrorAlert("Das Veröffentlichungsjahr muss eine gültige Zahl sein.");
             System.err.println("Fehler beim Formatieren von String zu Integer. " + e.getMessage());
+            return;
         }
 
-//        if(accountService.addBookToDatabase(title, author, yearOfPublication)) {
-//            SceneManager.switchScene("/com/example/buecherverwaltung/loggedin-view.fxml", "Willkommen " + session.getName());
-//        }
+
         if(accountService.addBookToDatabase(title, author, yearOfPublication)) {
-            session.getBooks().clear(); // Prüfen wenn man eine Leer liste, leer was passiert?
-            SceneManager.switchScene("/com/example/buecherverwaltung/loggedin-view.fxml", "Willkommen " + session.getName());
+            session.clearBooks();
+            field_title.clear();
+            field_author.clear();
+            field_yearOfPublication.clear();
+        }
+    }
+    @FXML
+    private void onMouseClickedAddBook(MouseEvent event) {
+        executeAddBook();
+    }
+    @FXML
+    private void onKeyPressedEnterAddBook(KeyEvent event) {
+        if(event.getCode().toString().equals("ENTER")) {
+            executeAddBook();
         }
     }
 
     @FXML
-    private void removeBookMenu(MouseEvent event) {
+    private void executeExitAddBookMenu() {
+        addBookMenu.setVisible(false);
+
+        menu.setVisible(true);
+        label_welcome.setVisible(true);
+    }
+    @FXML
+    private void onMouseClickedExitAddBookMenu(MouseEvent event) {
+        executeExitAddBookMenu();
+    }
+    @FXML
+    private void onKeyPressedEnterExitAddBook(KeyEvent event) {
+        if(event.getCode().toString().equals("ENTER")) {
+            executeExitAddBookMenu();
+        }
+    }
+
+
+
+    @FXML
+    private void executeRemoveBookMenu() {
         label_welcome.setVisible(false);
         menu.setVisible(false);
 
         removeBookMenu.setVisible(true);
     }
+    @FXML
+    private void onMouseClickedRemoveBookMenu(MouseEvent event) {
+        executeRemoveBookMenu();
+    }
+    @FXML
+    private void onKeyPressedEnterRemoveBookMenu(KeyEvent event) {
+        if(event.getCode().toString().equals("ENTER")) {
+            executeRemoveBookMenu();
+        }
+    }
 
     @FXML
-    private void removeBook(MouseEvent event) {
+    private void executeRemoveBook() {
         AccountService accountService = new AccountService();
         String title = field_removeTitle.getText();
         UserSession session = UserSession.getInstance();
 
         if(accountService.removeBookFromDatabase(title)) {
-            session.getBooks().clear();
-//            removeBookMenu.setVisible(false);
-//            menu.setVisible(true);
-//            label_welcome.setVisible(true);
+            if(session.getBooks() != null) {
+                session.clearBooks();
+            }
+            field_removeTitle.clear();
+        }
+    }
+    @FXML
+    private void onMouseClickedRemoveBook(MouseEvent event) {
+        executeRemoveBook();
+    }
+    @FXML
+    private void onKeyPressedEnterRemoveBook(KeyEvent event) {
+        if(event.getCode().toString().equals("ENTER")) {
+            executeRemoveBook();
         }
     }
 
     @FXML
-    private void exitRemoveBookMenu(MouseEvent event) {
+    private void executeExitRemoveBookMenu() {
         removeBookMenu.setVisible(false);
 
         menu.setVisible(true);
         label_welcome.setVisible(true);
     }
+    @FXML
+    private void onMouseClickedExitRemoveBookMenu(MouseEvent event) {
+        executeExitRemoveBookMenu();
+    }
+    @FXML
+    private void onKeyPressedEnterExitRemoveBookMenu(KeyEvent event) {
+        if(event.getCode().toString().equals("ENTER")) {
+            executeExitRemoveBookMenu();
+        }
+    }
+
+
 
     @FXML
-    private void showBooksMenu(MouseEvent event) {
+    private void executeShowBooksMenu() {
         menu.setVisible(false);
         label_welcome.setVisible(false);
 
@@ -192,7 +210,8 @@ public class LoggedInController {
         UserSession session = UserSession.getInstance();
         int userID = session.getUserID();
 
-        if(session.getBooks().isEmpty()) {
+
+        if(session.getBooks() == null) {
             session.setBooks(database.getAllBooks(userID));
         }
 
@@ -201,13 +220,67 @@ public class LoggedInController {
 
         showBooksMenu.setVisible(true);
     }
+    @FXML
+    private void onMouseClickedShowBooksMenu(MouseEvent event) {
+        executeShowBooksMenu();
+    }
+    @FXML
+    private void onKeyPressedEnterShowBooksMenu(KeyEvent event) {
+        if(event.getCode().toString().equals("ENTER")) {
+            executeShowBooksMenu();
+        }
+    }
 
     @FXML
-    private void exitShowBooksMenu(MouseEvent event) {
+    private void executeExitShowBooksMenu() {
         menu.setVisible(true);
         label_welcome.setVisible(true);
 
         showBooksMenu.setVisible(false);
+    }
+    @FXML
+    private void onMouseClickedExitShowBooksMenu(MouseEvent event) {
+        executeExitShowBooksMenu();
+    }
+    @FXML
+    private void onKeyPressedEnterExitShowBooksMenu(KeyEvent event) {
+        if(event.getCode().toString().equals("ENTER")) {
+            executeExitShowBooksMenu();
+        }
+    }
+
+
+
+    @FXML
+    private void executeLogout() {
+        UserSession session = UserSession.getInstance();
+        session.clearSession();
+        SceneManager.switchScene("/com/example/buecherverwaltung/login-view.fxml", "Login! in iTzMagiic's Bücherverwaltung");
+    }
+    @FXML
+    private void onMouseClickedLogout(MouseEvent event) {
+        executeLogout();
+    }
+    @FXML
+    private void onKeyPressedEnterLogout(KeyEvent event) {
+        if(event.getCode().toString().equals("ENTER")) {
+            executeLogout();
+        }
+    }
+
+    @FXML
+    private void executeExitProgram() {
+        System.exit(0);
+    }
+    @FXML
+    private void onMouseClickedExitProgram(MouseEvent event) {
+        executeExitProgram();
+    }
+    @FXML
+    private void onKeyPressedEnterExitProgram(KeyEvent event) {
+        if(event.getCode().toString().equals("ENTER")) {
+            executeExitProgram();
+        }
     }
 
 

@@ -234,7 +234,7 @@ public class Database {
     }
 
     public boolean bookExists(String title, int userID) {
-        String sql = "SELECT title FROM buecher WHERE title = ? AND idbenutzer = ?";
+        String sql = "SELECT titel FROM buecher WHERE titel = ? AND idbenutzer = ?";
         ResultSet resultSet = null;
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);

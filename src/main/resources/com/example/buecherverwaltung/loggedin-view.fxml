@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="516.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.buecherverwaltung.controller.LoggedInController">
+<AnchorPane prefHeight="516.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.buecherverwaltung.controller.LoggedInController">
    <children>
       <ImageView fitHeight="523.0" fitWidth="519.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -20,11 +14,11 @@
       </ImageView>
       <VBox fx:id="menu" layoutX="118.0" layoutY="131.0" prefHeight="258.0" prefWidth="284.0">
          <children>
-            <Button mnemonicParsing="false" onMouseClicked="#addBookMenu" prefHeight="54.0" prefWidth="284.0" text="Buch hinzufügen" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#removeBookMenu" prefHeight="54.0" prefWidth="284.0" text="Buch entfernen" />
-            <Button layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseDragged="#showBooksMenu" prefHeight="54.0" prefWidth="284.0" text="Alle Bücher anzeigen" />
-            <Button layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="54.0" prefWidth="284.0" text="Ausloggen" />
-            <Button layoutX="10.0" layoutY="172.0" mnemonicParsing="false" onMouseClicked="#exitProgram" prefHeight="54.0" prefWidth="284.0" text="Beenden" />
+            <Button mnemonicParsing="false" onKeyPressed="#onKeyPressedEnterAddBookMenu" onMouseClicked="#onMouseClickedAddBookMenu" prefHeight="54.0" prefWidth="284.0" text="Buch hinzufügen" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onKeyPressed="#onKeyPressedEnterRemoveBookMenu" onMouseClicked="#onMouseClickedRemoveBookMenu" prefHeight="54.0" prefWidth="284.0" text="Buch entfernen" />
+            <Button layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onKeyPressed="#onKeyPressedEnterShowBooksMenu" onMouseClicked="#onMouseClickedShowBooksMenu" prefHeight="54.0" prefWidth="284.0" text="Alle Bücher anzeigen" />
+            <Button layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onKeyPressed="#onKeyPressedEnterLogout" onMouseClicked="#onMouseClickedLogout" prefHeight="54.0" prefWidth="284.0" text="Ausloggen" />
+            <Button layoutX="10.0" layoutY="172.0" mnemonicParsing="false" onKeyPressed="#onKeyPressedEnterExitProgram" onMouseClicked="#onMouseClickedExitProgram" prefHeight="54.0" prefWidth="284.0" text="Beenden" />
          </children></VBox>
       <Label fx:id="label_welcome" alignment="CENTER" layoutX="118.0" layoutY="80.0" prefHeight="30.0" prefWidth="284.0" style="-fx-background-color: White;" text="Willkommen !!!">
          <font>
@@ -33,6 +27,11 @@
       </Label>
       <AnchorPane fx:id="addBookMenu" layoutX="46.0" layoutY="66.0" prefHeight="388.0" prefWidth="428.0" visible="false">
          <children>
+            <Label alignment="CENTER" layoutX="86.0" layoutY="26.0" prefHeight="35.0" prefWidth="257.0" style="-fx-background-color: white;" text="Buch hinzufügen" underline="true">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
             <Label alignment="CENTER" layoutX="14.0" layoutY="94.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: white;" text="Titel">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -48,33 +47,28 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="field_title" layoutX="207.0" layoutY="92.0" prefHeight="30.0" prefWidth="206.0" />
-            <Label alignment="CENTER" layoutX="86.0" layoutY="26.0" prefHeight="35.0" prefWidth="257.0" style="-fx-background-color: white;" text="Buch hinzufügen" underline="true">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <TextField fx:id="field_author" layoutX="207.0" layoutY="143.0" prefHeight="30.0" prefWidth="206.0" />
-            <TextField fx:id="field_yearOfPublication" layoutX="207.0" layoutY="195.0" prefHeight="30.0" prefWidth="206.0" />
-            <Button layoutX="208.0" layoutY="238.0" mnemonicParsing="false" onMouseClicked="#addBookToDatabase" prefHeight="30.0" prefWidth="103.0" text="Speichern" />
-            <Button layoutX="310.0" layoutY="238.0" mnemonicParsing="false" onMouseClicked="#exitAddBookMenu" prefHeight="30.0" prefWidth="103.0" text="Abbrechen" />
+            <TextField fx:id="field_title" layoutX="207.0" layoutY="92.0" onKeyPressed="#onKeyPressedEnterAddBook" prefHeight="30.0" prefWidth="206.0" />
+            <TextField fx:id="field_author" layoutX="207.0" layoutY="143.0" onKeyPressed="#onKeyPressedEnterAddBook" prefHeight="30.0" prefWidth="206.0" />
+            <TextField fx:id="field_yearOfPublication" layoutX="207.0" layoutY="195.0" onKeyPressed="#onKeyPressedEnterAddBook" prefHeight="30.0" prefWidth="206.0" />
+            <Button layoutX="208.0" layoutY="238.0" mnemonicParsing="false" onKeyPressed="#onKeyPressedEnterAddBook" onMouseClicked="#onMouseClickedAddBook" prefHeight="30.0" prefWidth="103.0" text="Speichern" />
+            <Button layoutX="310.0" layoutY="238.0" mnemonicParsing="false" onKeyPressed="#onKeyPressedEnterExitAddBook" onMouseClicked="#onMouseClickedExitAddBookMenu" prefHeight="30.0" prefWidth="103.0" text="Abbrechen" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="removeBookMenu" layoutX="56.0" layoutY="76.0" prefHeight="388.0" prefWidth="428.0" visible="false">
          <children>
-            <TextField fx:id="field_removeTitle" layoutX="208.0" layoutY="85.0" prefHeight="30.0" prefWidth="206.0" />
-            <Button layoutX="209.0" layoutY="138.0" mnemonicParsing="false" onMouseClicked="#removeBook" prefHeight="30.0" prefWidth="103.0" text="Löschen" />
-            <Button layoutX="312.0" layoutY="138.0" mnemonicParsing="false" onMouseClicked="#exitRemoveBookMenu" prefHeight="30.0" prefWidth="103.0" text="Abbrechen" />
-            <Label alignment="CENTER" layoutX="14.0" layoutY="86.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: white;" text="Titel">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
             <Label alignment="CENTER" layoutX="21.0" layoutY="14.0" prefHeight="27.0" prefWidth="387.0" style="-fx-background-color: white;" text="Welches Buch möchten Sie löschen?" underline="true">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
+            <Label alignment="CENTER" layoutX="14.0" layoutY="86.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: white;" text="Titel">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="field_removeTitle" layoutX="208.0" layoutY="85.0" onKeyPressed="#onKeyPressedEnterRemoveBook" prefHeight="30.0" prefWidth="206.0" />
+            <Button layoutX="209.0" layoutY="138.0" mnemonicParsing="false" onKeyPressed="#onKeyPressedEnterRemoveBook" onMouseClicked="#onMouseClickedRemoveBook" prefHeight="30.0" prefWidth="103.0" text="Löschen" />
+            <Button layoutX="312.0" layoutY="138.0" mnemonicParsing="false" onKeyPressed="#onKeyPressedEnterExitRemoveBookMenu" onMouseClicked="#onMouseClickedExitRemoveBookMenu" prefHeight="30.0" prefWidth="103.0" text="Abbrechen" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="showBooksMenu" layoutX="15.0" layoutY="14.0" prefHeight="492.0" prefWidth="491.0" visible="false">
@@ -91,7 +85,7 @@
                 <TableColumn fx:id="column_yearOfPublication" prefWidth="120.0" text="Erscheinungsjahr" />
               </columns>
             </TableView>
-            <Button layoutX="143.0" layoutY="435.0" mnemonicParsing="false" onMouseClicked="#exitShowBooksMenu" prefHeight="41.0" prefWidth="200.0" text="Abbrechen">
+            <Button layoutX="143.0" layoutY="435.0" mnemonicParsing="false" onKeyPressed="#onKeyPressedEnterExitShowBooksMenu" onMouseClicked="#onMouseClickedExitShowBooksMenu" prefHeight="41.0" prefWidth="200.0" text="Abbrechen">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

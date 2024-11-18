@@ -33,7 +33,9 @@ public class SceneManager {
             // Erstelle eine neue Szene und setze sie in die Stage
             Scene scene = new Scene(root);
             stage.setScene(scene);
+
             stage.setTitle(title);
+            stage.resizableProperty().setValue(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
