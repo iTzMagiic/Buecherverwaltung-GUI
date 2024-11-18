@@ -1,4 +1,4 @@
-package com.example.buecherverwaltung.utils;
+package com.example.buecherverwaltung.model;
 
 import java.util.ArrayList;
 

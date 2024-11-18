@@ -1,4 +1,4 @@
-package com.example.buecherverwaltung;
+package com.example.buecherverwaltung.utils;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

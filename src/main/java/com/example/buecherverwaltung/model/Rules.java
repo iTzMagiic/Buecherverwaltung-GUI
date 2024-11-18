@@ -1,4 +1,4 @@
-package com.example.buecherverwaltung.utils;
+package com.example.buecherverwaltung.model;
 
 import javafx.scene.control.Alert;
 
@@ -39,13 +39,17 @@ public class Rules {
         return author != null && !author.trim().isEmpty() && author.matches("[a-zA-Z ]+");
     }
 
-    public static boolean isValidYear(String yearOfPublicationText) {
+    public static boolean isValidYearText(String yearOfPublicationText) {
         try {
             int year = Integer.parseInt(yearOfPublicationText);
             return year > 1900 && year < 2025;
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public static boolean isValidYear(int yearOfPublication) {
+        return yearOfPublication > 1900 & yearOfPublication < 2025;
     }
 
 }

@@ -1,9 +1,10 @@
 package com.example.buecherverwaltung.controller;
 
-import com.example.buecherverwaltung.SceneManager;
-import com.example.buecherverwaltung.utils.Database;
-import com.example.buecherverwaltung.utils.Rules;
-import com.example.buecherverwaltung.utils.UserSession;
+import com.example.buecherverwaltung.model.AccountService;
+import com.example.buecherverwaltung.utils.SceneManager;
+import com.example.buecherverwaltung.model.Database;
+import com.example.buecherverwaltung.model.Rules;
+import com.example.buecherverwaltung.model.UserSession;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -63,10 +64,26 @@ public class SignupController{
             return;
         }
 
-        if(database.createUser(name, username, password)) {
+        if(database.createAccount(name, username, password)) {
             UserSession session = UserSession.getInstance();
             session.setName(name);
             SceneManager.switchScene("/com/example/buecherverwaltung/login-view.fxml", "Logg dich ein " + name + "!!!");
+        }
+    }
+
+    private void newCreateAccount(MouseEvent event) {
+        AccountService accountService = new AccountService();
+
+        String username = field_username.getText();
+        String password = field_password.getText();
+        String name = field_name.getText();
+
+        if(accountService.signUpToDatabase(username, password, name)) {
+            SceneManager.switchScene("/com/example/buecherverwaltung/login-view.fxml", "Logg dich ein " + name + "!!!");
+        } else {
+            field_username.clear();
+            field_password.clear();
+            field_name.clear();
         }
     }
 

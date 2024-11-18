@@ -1,6 +1,8 @@
-package com.example.buecherverwaltung.utils;
+package com.example.buecherverwaltung.model;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database {
     private final String URL = "jdbc:mysql://localhost:3306/buecherverwaltung";
@@ -63,51 +65,53 @@ public class Database {
         return false;
     }
 
-//    public List<Book> getAllBooks(int userID) {
-//        List<Book> books = new ArrayList<>();
-//        String sql = "SELECT titel, autor, erscheinungsjahr FROM buecher WHERE idbenutzer = ?";
-//        ResultSet resultSet = null;
-//
-//        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-//             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-//            preparedStatement.setInt(1, userID);
-//            resultSet = preparedStatement.executeQuery();
-//
-//            while (resultSet.next()) {
-//                String title = resultSet.getString("titel");
-//                String author = resultSet.getString("autor");
-//                int erscheinungsjahr = resultSet.getInt("erscheinungsjahr");
-//
-//                Book book = new Book(title, author, erscheinungsjahr);
-//                books.add(book);
-//            }
-//        } catch (SQLException e) {
-//            System.out.println("Fehler beim Abrufen der Bücher: " + e.getMessage());
-//        } finally {
-//            if (resultSet != null) {
-//                try {
-//                    resultSet.close();
-//                } catch (SQLException e) {
-//                    System.out.println("Fehler beim Schließen des Resultsets: " + e.getMessage());
-//                }
-//            }
-//        }
-//
-//        return books;
-//    }
+    public List<Book> getAllBooks(int userID) {
+        List<Book> books = new ArrayList<>();
+        String sql = "SELECT titel, autor, erscheinungsjahr FROM buecher WHERE idbenutzer = ?";
+        ResultSet resultSet = null;
 
-    public void removeBook(String title, int userID) {
-        String sql = "DELETE FROM buecher WHERE titel = ?";
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, userID);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String title = resultSet.getString("titel");
+                String author = resultSet.getString("autor");
+                int erscheinungsjahr = resultSet.getInt("erscheinungsjahr");
+
+                Book book = new Book(title, author, erscheinungsjahr);
+                books.add(book);
+            }
+        } catch (SQLException e) {
+            System.err.println("Fehler beim Abrufen der Bücher: " + e.getMessage());
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    System.err.println("Fehler beim Schließen des Resultsets: " + e.getMessage());
+                }
+            }
+        }
+        return books;
+    }
+
+    public boolean removeBook(String title, int userID) {
+        String sql = "DELETE FROM buecher WHERE titel = ? AND idbenutzer = ?";
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, title);
+            preparedStatement.setInt(2, userID);
             preparedStatement.executeUpdate();
 
-            System.out.println("Buch erfolgreich entfernt!");
+            return true;
         } catch (SQLException e) {
-            System.out.println("Fehler beim Löschen der Bücher: " + e.getMessage());
+            System.out.println("Fehler beim Löschen des Buches: " + e.getMessage());
         }
+
+        return false;
     }
 
     public int getUserID(String username, String password) {
@@ -144,7 +148,7 @@ public class Database {
         return -1;
     }
 
-    public boolean createUser(String name, String username, String password) {
+    public boolean createAccount(String name, String username, String password) {
         String sql = "INSERT INTO benutzer (name, benutzername, passwort) VALUES (?, ?, ?)";
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -226,6 +230,32 @@ public class Database {
                 }
             }
         }
+        return false;
+    }
+
+    public boolean bookExists(String title, int userID) {
+        String sql = "SELECT title FROM buecher WHERE title = ? AND idbenutzer = ?";
+        ResultSet resultSet = null;
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, title);
+            preparedStatement.setInt(2, userID);
+            resultSet = preparedStatement.executeQuery();
+
+            return resultSet.next();
+        } catch (SQLException e) {
+            System.err.println("Fehler beim Prüfen nach dem Buch: " + e.getMessage());
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    System.err.println("Fehler beim Schließen des Resultsets: " + e.getMessage());
+                }
+            }
+        }
+
         return false;
     }
 

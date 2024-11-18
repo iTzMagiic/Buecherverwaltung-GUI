@@ -1,10 +1,11 @@
 package com.example.buecherverwaltung.controller;
 
 
-import com.example.buecherverwaltung.SceneManager;
-import com.example.buecherverwaltung.utils.Database;
-import com.example.buecherverwaltung.utils.Rules;
-import com.example.buecherverwaltung.utils.UserSession;
+import com.example.buecherverwaltung.model.AccountService;
+import com.example.buecherverwaltung.utils.SceneManager;
+import com.example.buecherverwaltung.model.Database;
+import com.example.buecherverwaltung.model.Rules;
+import com.example.buecherverwaltung.model.UserSession;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -63,6 +64,22 @@ public class LoginController {
         session.setName(name);
 
         SceneManager.switchScene("/com/example/buecherverwaltung/loggedin-view.fxml", "Willkommen " + name +"");
+    }
+
+
+    @FXML
+    private void newLogin(MouseEvent event) {
+        AccountService accountService = new AccountService();
+
+        String username = field_username.getText();
+        String password = field_password.getText();
+
+        if(accountService.loginToDatabase(username, password)) {
+            SceneManager.switchScene("path", "title");
+        } else {
+            field_username.clear();
+            field_password.clear();
+        }
     }
 
     @FXML

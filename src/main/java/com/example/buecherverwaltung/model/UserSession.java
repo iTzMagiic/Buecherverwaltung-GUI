@@ -1,4 +1,6 @@
-package com.example.buecherverwaltung.utils;
+package com.example.buecherverwaltung.model;
+
+import java.util.List;
 
 public class UserSession {
 
@@ -13,6 +15,7 @@ public class UserSession {
     private static UserSession instance;
     private int userID;
     private String name;
+    private List<Book> books;
 
 
     private UserSession() {}
@@ -27,6 +30,7 @@ public class UserSession {
     public void clearSession() {
         userID = 0;
         name = null;
+        clearBooks();
     }
 
     public void setUserID(int userID) {
@@ -40,9 +44,21 @@ public class UserSession {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getName() {
         return name;
     }
 
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void clearBooks() {
+        books.clear();
+    }
 
 }
