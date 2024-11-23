@@ -46,6 +46,11 @@ public class AccountService {
 
     public boolean signUpToDatabase(String username, String password, String name) {
 
+        /* TODO: Beispiele für passende Benutzernamen, Namen und Passwort geben wenn falsches Passwort eingegeben wurde
+            Oder kleinen etwas ausgegrauten Lable unter den TextField's packen mit Namens Beispiele.
+         */
+
+
         if(!database.testConnection()) {
             Rules.showErrorAlert("Die Verbindung zur Datenbank konnte nicht hergestellt werden.");
             return false;

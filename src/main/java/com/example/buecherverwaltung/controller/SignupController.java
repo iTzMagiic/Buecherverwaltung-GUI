@@ -22,17 +22,17 @@ public class SignupController{
 
 
     @FXML
-    private void executeLogin() {
+    private void executeLoginMenu() {
         SceneManager.switchScene("/com/example/buecherverwaltung/login-view.fxml", "Login! in iTzMagiic Bücherverwaltung !!");
     }
     @FXML
     private void onMouseClickedLogin(MouseEvent event) {
-        executeLogin();
+        executeLoginMenu();
     }
     @FXML
     private void onKeyPressedEnterLogin(KeyEvent event) {
         if(event.getCode().toString().equals("ENTER")) {
-            executeLogin();
+            executeLoginMenu();
         }
     }
 
