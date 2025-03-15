@@ -18,7 +18,6 @@ public class LoginController {
     private PasswordField field_password;
 
 
-
     @FXML
     private void executeLogin() {
         AccountService accountService = new AccountService();
@@ -26,7 +25,7 @@ public class LoginController {
         String username = field_username.getText();
         String password = field_password.getText();
 
-        if(accountService.loginToDatabase(username, password)) {
+        if (accountService.loginToDatabase(username, password)) {
             UserSession session = UserSession.getInstance();
 
             SceneManager.switchScene("/com/example/buecherverwaltung/loggedin-view.fxml", "Willkommen " + session.getName());
@@ -35,54 +34,54 @@ public class LoginController {
             field_password.clear();
         }
     }
+
     @FXML
     private void onMouseClickedLogin(MouseEvent event) {
         executeLogin();
     }
+
     @FXML
     private void onKeyPressedEnterLogin(KeyEvent event) {
-        if(event.getCode().toString().equals("ENTER")) {
+        if (event.getCode().toString().equals("ENTER")) {
             executeLogin();
         }
     }
-
 
 
     @FXML
     private void executeExit() {
         System.exit(0);
     }
+
     @FXML
     private void onMouseClickedExit(MouseEvent event) {
         executeExit();
     }
+
     @FXML
     private void onKeyPressedExit(KeyEvent event) {
-        if(event.getCode().toString().equals("ENTER")) {
+        if (event.getCode().toString().equals("ENTER")) {
             executeExit();
         }
     }
-
 
 
     @FXML
     private void executeSignup() {
         SceneManager.switchScene("/com/example/buecherverwaltung/signup-view.fxml", "Registrier Dich jetzt!!");
     }
+
     @FXML
     private void onMouseClickedSignup(MouseEvent event) {
         executeSignup();
     }
+
     @FXML
     private void onKeyPressedEnterSignup(KeyEvent event) {
-        if(event.getCode().toString().equals("ENTER")) {
+        if (event.getCode().toString().equals("ENTER")) {
             executeSignup();
         }
     }
-
-
-
-
 
 
 }
