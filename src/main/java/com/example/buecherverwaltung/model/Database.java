@@ -10,31 +10,6 @@ public class Database {
     private final String PASSWORD = "X(RL_{9yA#q,eTg?CZWJuX-";
 
 
-    public Connection getConnection() {
-        Connection connection = null;
-
-        try {
-            // Hier verwenden wir die Methode aus der DatabaseConnection-Klasse
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
-
-            if (connection != null) {
-                return connection;
-            }
-        } catch (SQLException e) {
-            System.err.println("Verbindung zur Datenbank fehlgeschlagen! " + e.getMessage());
-        }
-        finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    System.err.println("Schließen der Datenbank fehlgeschlagen! " + e.getMessage());
-                }
-            }
-        }
-        return connection;
-    }
-
     public boolean testConnection() {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
             if (connection != null) {
@@ -238,7 +213,7 @@ public class Database {
         ResultSet resultSet = null;
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-        PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, title);
             preparedStatement.setInt(2, userID);
             resultSet = preparedStatement.executeQuery();

@@ -9,7 +9,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 
-public class SignupController{
+public class SignupController {
 
     @FXML
     private TextField field_username;
@@ -19,23 +19,22 @@ public class SignupController{
     private PasswordField field_password;
 
 
-
-
     @FXML
     private void executeLoginMenu() {
         SceneManager.switchScene("/com/example/buecherverwaltung/login-view.fxml", "Login! in iTzMagiic Bücherverwaltung !!");
     }
+
     @FXML
     private void onMouseClickedLogin(MouseEvent event) {
         executeLoginMenu();
     }
+
     @FXML
     private void onKeyPressedEnterLogin(KeyEvent event) {
-        if(event.getCode().toString().equals("ENTER")) {
+        if (event.getCode().toString().equals("ENTER")) {
             executeLoginMenu();
         }
     }
-
 
 
     @FXML
@@ -46,7 +45,7 @@ public class SignupController{
         String password = field_password.getText();
         String name = field_name.getText();
 
-        if(accountService.signUpToDatabase(username, password, name)) {
+        if (accountService.signUpToDatabase(username, password, name)) {
             SceneManager.switchScene("/com/example/buecherverwaltung/login-view.fxml", "Logg dich ein " + name + "!!!");
         } else {
             field_username.clear();
@@ -54,20 +53,18 @@ public class SignupController{
             field_name.clear();
         }
     }
+
     @FXML
     private void onMouseClickedCreateAccount(MouseEvent event) {
         executeCreateAccount();
     }
+
     @FXML
     private void onKeyPressedEnterCreateAccount(KeyEvent event) {
-        if(event.getCode().toString().equals("ENTER")) {
+        if (event.getCode().toString().equals("ENTER")) {
             executeCreateAccount();
         }
     }
-
-
-
-
 
 
 }

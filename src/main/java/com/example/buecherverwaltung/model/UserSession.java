@@ -18,10 +18,11 @@ public class UserSession {
     private List<Book> books;
 
 
-    private UserSession() {}
+    private UserSession() {
+    }
 
     public static UserSession getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new UserSession();
         }
         return instance;
