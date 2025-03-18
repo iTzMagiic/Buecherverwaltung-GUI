@@ -3,6 +3,7 @@ module com.example.buecherverwaltung {
     requires javafx.fxml;
     requires java.sql;
     requires java.desktop;
+    requires java.dotenv;
 
 
     opens com.example.buecherverwaltung to javafx.fxml;

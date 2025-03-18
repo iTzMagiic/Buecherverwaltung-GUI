@@ -1,13 +1,22 @@
 package com.example.buecherverwaltung.model;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
-    private final String URL = "jdbc:mysql://localhost:3306/buecherverwaltung";
-    private final String USER = "buecherverwaltung";
-    private final String PASSWORD = "X(RL_{9yA#q,eTg?CZWJuX-";
+    private final String URL;
+    private final String USER;
+    private final String PASSWORD;
+
+    public Database() {
+        Dotenv dotenv = Dotenv.load();
+
+        this.URL = dotenv.get("DB_URL");
+        this.USER = dotenv.get("DB_USER");
+        this.PASSWORD = dotenv.get("DB_PASSWORD");
+    }
 
 
     public boolean testConnection() {
